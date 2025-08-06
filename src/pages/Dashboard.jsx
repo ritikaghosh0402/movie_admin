@@ -3,14 +3,9 @@ import GenreForm from "../components/GenreForm";
 import UploadMovieForm from "../components/UploadMovieForm";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
-// Example imports for your listed icons
-import { MdDelete, MdOutlineFileUpload } from "react-icons/md";
-import { CiEdit, CiImageOn, CiMusicNote1, CiStar } from "react-icons/ci";
-import { RxCross1 } from "react-icons/rx";
+import { MdOutlineLogout } from "react-icons/md";
 import { FaRegUserCircle } from "react-icons/fa";
-import { IoSaveOutline } from "react-icons/io5";
-import { FiFilm } from "react-icons/fi";
-import { FaArrowTrendUp } from "react-icons/fa6";
+
 
 
 const Dashboard = () => {
@@ -25,7 +20,7 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-[#0f1117] text-white px-6 py-10 relative overflow-hidden">
-      {/* Sidebar Toggle (Hamburger) */}
+      {/* Sidebar Toggle */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
         className="fixed top-4 left-4 z-50 text-white bg-yellow-400 hover:bg-yellow-500 p-2 rounded-md md:hidden"
@@ -49,11 +44,12 @@ const Dashboard = () => {
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-[#1f1f1f] border border-yellow-400/30 text-white rounded-lg shadow-lg z-50 overflow-hidden">
               <button
-                onClick={handleLogout}
-                className="w-full text-left px-4 py-3 hover:bg-yellow-500 hover:text-black transition"
-              >
-                🚪 Logout
-              </button>
+  onClick={handleLogout}
+  className="w-full flex items-center gap-2 px-4 py-3 text-left hover:bg-yellow-500 hover:text-black transition-colors duration-200"
+>
+  <MdOutlineLogout className="text-lg" />
+  <span>Logout</span>
+</button>
             </div>
           )}
         </div>

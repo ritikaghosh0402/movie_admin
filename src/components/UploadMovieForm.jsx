@@ -1,4 +1,11 @@
 import React, { useState } from "react";
+import { MdDelete, MdOutlineFileUpload } from "react-icons/md";
+import { CiEdit, CiImageOn, CiMusicNote1, CiStar } from "react-icons/ci";
+import { RxCross1 } from "react-icons/rx";
+import { FaRegUserCircle } from "react-icons/fa";
+import { IoSaveOutline } from "react-icons/io5";
+import { FiFilm } from "react-icons/fi";
+import { FaArrowTrendUp } from "react-icons/fa6";
 
 const UploadMovieForm = () => {
   const [rating, setRating] = useState(5);
@@ -40,7 +47,9 @@ const UploadMovieForm = () => {
         {/* Poster */}
         <label className="border-2 border-dashed border-yellow-400 bg-[#1a1c23] rounded-lg p-4 text-center cursor-pointer hover:border-yellow-500">
           <input type="file" hidden />
-          <div className="text-yellow-400 text-xl mb-2">🖼️</div>
+          <div className="text-yellow-400 text-xl mb-2 flex justify-center">
+            <CiImageOn />
+          </div>
           <div className="text-sm text-yellow-400 font-semibold">Choose poster image</div>
           <div className="text-xs text-gray-400 mt-1">PNG, JPG, WEBP up to 10MB</div>
           <div className="text-xs text-yellow-500 mt-1 underline">Click to browse or drag & drop</div>
@@ -49,7 +58,10 @@ const UploadMovieForm = () => {
         {/* Backdrop */}
         <label className="border-2 border-dashed border-yellow-400 bg-[#1a1c23] rounded-lg p-4 text-center cursor-pointer hover:border-yellow-500">
           <input type="file" hidden />
-          <div className="text-yellow-400 text-xl mb-2">🖼️</div>
+          <div className="text-yellow-400 text-xl mb-2 flex justify-center">
+            <CiImageOn />
+          </div>
+
           <div className="text-sm text-yellow-400 font-semibold">Choose backdrop image</div>
           <div className="text-xs text-gray-400 mt-1">PNG, JPG, WEBP up to 10MB</div>
           <div className="text-xs text-yellow-500 mt-1 underline">Click to browse or drag & drop</div>
@@ -58,7 +70,7 @@ const UploadMovieForm = () => {
         {/* Video */}
         <label className="border-2 border-dashed border-yellow-400 bg-[#1a1c23] rounded-lg p-4 text-center cursor-pointer hover:border-yellow-500">
           <input type="file" hidden />
-          <div className="text-yellow-400 text-xl mb-2">🎥</div>
+          <div className="text-yellow-400 text-xl mb-2 flex justify-center"><FiFilm /></div>
           <div className="text-sm text-yellow-400 font-semibold">Choose video file</div>
           <div className="text-xs text-gray-400 mt-1">MP4, AVI, MOV, WEBM up to 500MB</div>
           <div className="text-xs text-yellow-500 mt-1 underline">Click to browse or drag & drop</div>
@@ -96,7 +108,11 @@ const UploadMovieForm = () => {
           onChange={(e) => setRating(e.target.value)}
           className="w-full mt-2"
         />
-        <div className="text-yellow-400 text-right font-semibold mt-1">⭐ {rating}</div>
+        <div className="text-yellow-400 text-right font-semibold mt-1 flex items-center justify-end gap-1">
+          <CiStar />
+          {rating}
+        </div>
+
       </div>
 
       {/* Dropdown Row */}
@@ -128,9 +144,11 @@ const UploadMovieForm = () => {
       </div>
 
       {/* Upload Button */}
-      <button className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 rounded transition duration-200">
-        ⬆️ Upload Movie
+      <button className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 rounded transition duration-200 flex items-center justify-center gap-2">
+        <MdOutlineFileUpload />
+        Upload Movie
       </button>
+
     </div>
   );
 };

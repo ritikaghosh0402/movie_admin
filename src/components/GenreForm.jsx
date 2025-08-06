@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
-import GenreParticles from "./GenreParticles"; // path may vary
-// Example imports for your listed icons
-import { MdDelete, MdOutlineFileUpload } from "react-icons/md";
-import { CiEdit, CiImageOn, CiMusicNote1, CiStar } from "react-icons/ci";
+import GenreParticles from "./GenreParticles"; 
+import { MdDelete } from "react-icons/md";
+import { CiEdit, CiMusicNote1 } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
-import { FaRegUserCircle } from "react-icons/fa";
 import { IoSaveOutline } from "react-icons/io5";
-import { FiFilm } from "react-icons/fi";
 import { FaArrowTrendUp } from "react-icons/fa6";
 
 
@@ -64,9 +61,11 @@ const GenreForm = () => {
             transition={{ duration: 0.5 }}
             className="bg-[#ffffff0a] backdrop-blur-md border border-yellow-400/40 rounded-lg p-6 shadow-yellow-500/10 min-h-[200px]"
           >
-            <h2 className="text-xl font-bold mb-4 text-yellow-400 text-center">
-              📄 {isEdit ? "Edit Genre" : "Add Genre"}
-            </h2>
+            <h2 className="text-xl font-bold mb-4 text-yellow-400 text-center flex items-center justify-center gap-2">
+  <IoSaveOutline />
+  {isEdit ? "Edit Genre" : "Add Genre"}
+</h2>
+
             <label className="text-yellow-400 font-semibold">Genre Name</label>
             <input
               value={genre}
@@ -81,7 +80,16 @@ const GenreForm = () => {
                 onClick={isEdit ? handleUpdate : handleAdd}
                 className="bg-yellow-400 text-black px-6 py-2 rounded-xl shadow-inner shadow-yellow-300 hover:scale-105 transition duration-200"
               >
-                {isEdit ? "💾 Update Genre" : "➕ Add Genre"}
+                {isEdit ? (
+  <span className="flex items-center gap-2">
+    <IoSaveOutline /> Update Genre
+  </span>
+) : (
+  <span className="flex items-center gap-2">
+    <IoSaveOutline /> Add Genre
+  </span>
+)}
+
               </motion.button>
               {isEdit && (
                 <motion.button
@@ -91,10 +99,11 @@ const GenreForm = () => {
                     setIsEdit(false);
                     setGenre("");
                   }}
-                  className="bg-gray-700 text-white px-6 py-2 rounded-lg"
+                  className="bg-gray-700 text-yellow-400 px-6 py-2 rounded-lg"
                 >
-                  <RxCross1 />
-                   Cancel
+                  <RxCross1 />  
+                  
+                   
                 </motion.button>
               )}
             </div>
@@ -108,11 +117,11 @@ const GenreForm = () => {
             className="bg-black/20 text-white border border-yellow-400/30 rounded-lg p-4 shadow-yellow-200/10 backdrop-blur-md min-h-[80px] flex justify-between items-center"
           >
             <div>
-              <h4 className="font-bold text-yellow-300 text-lg">📊 Total Genres</h4>
+              <h4 className="font-bold text-yellow-300 text-lg"> Total Genres</h4>
               <p className="text-sm text-gray-400">Manage content genres</p>
             </div>
             <div className="text-yellow-400 font-bold text-2xl flex items-center gap-2">
-              {genres.length} <span>📈</span>
+              {genres.length} <span><FaArrowTrendUp /></span>
             </div>
           </motion.div>
         </div>
@@ -123,7 +132,10 @@ const GenreForm = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <h2 className="text-xl font-bold mb-4 text-yellow-400">🎵 Existing Genres</h2>
+         <h2 className="text-xl font-bold mb-4 text-yellow-400">
+  <CiMusicNote1 className="inline-block mr-2" /> Existing Genres
+</h2>
+
           <div className="space-y-3">
             {genres.map((g, idx) => (
   <GenreParticles key={idx}>
