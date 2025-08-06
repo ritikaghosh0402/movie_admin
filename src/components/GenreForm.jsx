@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import GenreParticles from "./GenreParticles"; // path may vary
+// Example imports for your listed icons
+import { MdDelete, MdOutlineFileUpload } from "react-icons/md";
+import { CiEdit, CiImageOn, CiMusicNote1, CiStar } from "react-icons/ci";
+import { RxCross1 } from "react-icons/rx";
+import { FaRegUserCircle } from "react-icons/fa";
+import { IoSaveOutline } from "react-icons/io5";
+import { FiFilm } from "react-icons/fi";
+import { FaArrowTrendUp } from "react-icons/fa6";
+
 
 const GenreForm = () => {
   const [genre, setGenre] = useState("");
@@ -39,99 +49,115 @@ const GenreForm = () => {
 
   return (
     <div className="w-full relative flex flex-col items-center justify-center z-10">
-      {/* Yellow Glowing Circle */}
-      <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-yellow-500 opacity-10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0" />
+      {/* Glowing Background */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+        <div className="w-[700px] h-[700px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-yellow-400/30 via-yellow-400/10 to-transparent blur-3xl rounded-full"></div>
+      </div>
 
-      {/* Genre Form + Existing Genres Grid */}
-      <div className="w-full max-w-6xl grid md:grid-cols-2 gap-6 z-10">
-        {/* Add/Edit Genre */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full bg-[#ffffff0a] backdrop-blur-md border border-yellow-400 rounded-md p-6"
-        >
-          <h2 className="text-xl font-bold mb-4 text-yellow-400 text-center">📄 {isEdit ? "Edit Genre" : "Add Genre"}</h2>
-          <label className="text-yellow-400 font-semibold">Genre Name</label>
-          <input
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
-            className="bg-transparent text-white p-2 mt-1 w-full border border-yellow-400 rounded-md"
-            placeholder="🎵 Genre"
-          />
-          <div className="flex gap-3 mt-4 justify-center">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={isEdit ? handleUpdate : handleAdd}
-              className="bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-md font-semibold"
-            >
-              {isEdit ? "💾 Update Genre" : "➕ Add Genre"}
-            </motion.button>
-            {isEdit && (
+      <div className="w-full max-w-6xl grid md:grid-cols-2 gap-6 relative z-10">
+        {/* Left Column: Add Genre + Total Genres */}
+        <div className="space-y-6 col-span-1">
+          {/* Add Genre Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="bg-[#ffffff0a] backdrop-blur-md border border-yellow-400/40 rounded-lg p-6 shadow-yellow-500/10 min-h-[200px]"
+          >
+            <h2 className="text-xl font-bold mb-4 text-yellow-400 text-center">
+              📄 {isEdit ? "Edit Genre" : "Add Genre"}
+            </h2>
+            <label className="text-yellow-400 font-semibold">Genre Name</label>
+            <input
+              value={genre}
+              onChange={(e) => setGenre(e.target.value)}
+              className="bg-transparent text-white p-2 mt-1 w-full border border-yellow-400/50 rounded-lg"
+              placeholder="🎵 Genre"
+            />
+            <div className="flex gap-3 mt-4 justify-center">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  setIsEdit(false);
-                  setGenre("");
-                }}
-                className="bg-gray-600 text-white px-4 py-2 rounded-md"
+                onClick={isEdit ? handleUpdate : handleAdd}
+                className="bg-yellow-400 text-black px-6 py-2 rounded-xl shadow-inner shadow-yellow-300 hover:scale-105 transition duration-200"
               >
-                ❌
+                {isEdit ? "💾 Update Genre" : "➕ Add Genre"}
               </motion.button>
-            )}
-          </div>
-        </motion.div>
+              {isEdit && (
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    setIsEdit(false);
+                    setGenre("");
+                  }}
+                  className="bg-gray-700 text-white px-6 py-2 rounded-lg"
+                >
+                  <RxCross1 />
+                   Cancel
+                </motion.button>
+              )}
+            </div>
+          </motion.div>
 
-        {/* Existing Genres */}
+          {/* Total Genres Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bg-black/20 text-white border border-yellow-400/30 rounded-lg p-4 shadow-yellow-200/10 backdrop-blur-md min-h-[80px] flex justify-between items-center"
+          >
+            <div>
+              <h4 className="font-bold text-yellow-300 text-lg">📊 Total Genres</h4>
+              <p className="text-sm text-gray-400">Manage content genres</p>
+            </div>
+            <div className="text-yellow-400 font-bold text-2xl flex items-center gap-2">
+              {genres.length} <span>📈</span>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Right Column: Existing Genres */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="w-full"
         >
           <h2 className="text-xl font-bold mb-4 text-yellow-400">🎵 Existing Genres</h2>
           <div className="space-y-3">
             {genres.map((g, idx) => (
-              <motion.div
-                key={idx}
-                whileHover={{ scale: 1.03 }}
-                className="flex justify-between items-center px-4 py-3 bg-transparent text-yellow-300 rounded-md transition-all duration-300 hover:shadow-[0_0_10px_#facc15]"
-              >
-                <span>{g}</span>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => handleEdit(g, idx)}
-                    className="bg-yellow-400 hover:bg-yellow-500 text-black px-3 py-1 rounded-md"
-                  >
-                    ✏️
-                  </button>
-                  <button
-                    onClick={() => handleDelete(idx)}
-                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md"
-                  >
-                    🗑️
-                  </button>
-                </div>
-              </motion.div>
-            ))}
+  <GenreParticles key={idx}>
+    <motion.div
+      whileHover={{
+        scale: 1.03,
+      }}
+      className="relative flex justify-between items-center bg-[#1b1b1b] text-yellow-300 px-4 py-2 rounded-lg transition overflow-hidden group"
+    >
+      {/* Particle hover glow effect */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500">
+        <div className="w-full h-full animate-pulse bg-yellow-400/5 rounded-lg blur-sm pointer-events-none"></div>
+      </div>
+      <span className="z-10">{g}</span>
+       <div className="z-10 relative flex justify-end gap-2 mt-2">
+        <button
+          onClick={() => handleEdit(g, idx)}
+          className="p-2 text-yellow-300 border border-yellow-400 hover:bg-yellow-400 hover:text-black rounded-md transition"
+        >
+          <CiEdit />
+        </button>
+        <button
+          onClick={() => handleDelete(idx)}
+          className="p-2 text-white border border-red-500 hover:bg-red-500 rounded-md transition"
+        >
+           <MdDelete />
+        </button>
+      </div>
+    </motion.div>
+  </GenreParticles>
+))}
+
           </div>
         </motion.div>
-      </div>
-
-      {/* Total Genres Section Below */}
-      <div className="mt-10 w-full max-w-md z-10">
-        <div className="bg-[#ffffff0a] backdrop-blur-md border border-yellow-400 rounded-md p-5 flex items-center justify-between text-white">
-          <div>
-            <h3 className="font-semibold text-md">Total Genres</h3>
-            <p className="text-gray-400 text-sm">Manage content genres</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-yellow-400 text-2xl font-bold">{genres.length}</span>
-            <span className="text-green-400 text-xl">📈</span>
-          </div>
-        </div>
       </div>
     </div>
   );
