@@ -1,4 +1,3 @@
-// src/pages/Dashboard.jsx
 import React, { useState } from "react";
 import GenreForm from "../components/GenreForm";
 import UploadMovieForm from "../components/UploadMovieForm";
@@ -14,22 +13,21 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f1117] text-white px-6 py-8">
-      {/* Header */}
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-extrabold">Add Genres</h1>
+    <div className="min-h-screen bg-[#0f1117] text-white px-6 py-10">
+      {/* Top Right Admin Dropdown */}
+      <div className="flex justify-end items-center mb-6">
         <div className="relative">
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="flex items-center bg-yellow-500 text-black px-4 py-2 rounded-full shadow-md"
+            className="flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-4 py-2 rounded-full shadow-lg transition"
           >
-            <span className="mr-2">👤</span> Admin User
+            <span className="text-lg">👤</span> Admin User
           </button>
           {dropdownOpen && (
-            <div className="absolute right-0 mt-2 bg-[#1a1c23] border border-yellow-500 rounded shadow-lg z-50">
+            <div className="absolute right-0 mt-2 w-48 bg-[#1f1f1f] border border-yellow-500 text-white rounded-lg shadow-lg z-50 overflow-hidden">
               <button
                 onClick={handleLogout}
-                className="block px-4 py-2 text-left w-full hover:bg-yellow-500 hover:text-black"
+                className="w-full text-left px-4 py-3 hover:bg-yellow-500 hover:text-black transition"
               >
                 🚪 Logout
               </button>
@@ -38,12 +36,16 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Content Sections */}
-      <div className="grid md:grid-cols-2 gap-6">
-        <GenreForm />
-        {/* GenreForm already contains the genre list */}
+      {/* Center Heading */}
+      <div className="text-center mb-16">
+        <h1 className="text-5xl font-extrabold mb-2">Add Genres</h1>
+        <p className="text-gray-400 text-lg">Organize content by genres and themes</p>
       </div>
 
+      {/* Genre Form + Existing Genres */}
+      <GenreForm />
+
+      {/* Upload Movie Section */}
       <UploadMovieForm />
     </div>
   );

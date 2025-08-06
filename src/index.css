@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-[#0f1117] text-white min-h-screen w-full;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Optional: Scrollbar hide for clean UI */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
