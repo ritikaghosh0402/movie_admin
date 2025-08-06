@@ -32,7 +32,7 @@ export default function Sidebar({ open, setOpen }) {
             <button
               onClick={() => {
                 localStorage.removeItem("token");
-                window.location.href = "/login";
+                window.location.href = "/";
               }}
               className="text-red-400 hover:text-red-600"
             >
